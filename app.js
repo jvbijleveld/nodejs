@@ -47,6 +47,8 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT, process.env.HOST, function(err) {
+    console.log('server runninng at ' + http.url );
+});
 
-console.log('anyone listening...? port ' + process.env.PORT);
+
