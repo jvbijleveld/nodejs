@@ -6,11 +6,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoClient = require('mongodb').MongoClient, assert = require('assert');
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/' + process.env.DB_NAME);
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log("mongoose succesfullt connected to " + process.env.DB_NAME);
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,6 +59,7 @@ module.exports = app;
 
 app.listen(process.env.PORT, process.env.HOST, function(err) {
     console.log('server runninng at ' + process.env.HOST + ":" + process.env.PORT );
+
 });
 
 
