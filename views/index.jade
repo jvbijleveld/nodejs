@@ -1,5 +1,13 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 #{title}
+  p Welcome to my site
+  
+  ul#links
+  li
+   a(href="/Page1") Page 1
+  li
+    a(href="/Page2") Page 2
+  li
+    a(href="/Page3") Page not found
